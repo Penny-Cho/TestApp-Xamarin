@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
              x:Class="TestApp.MainPage">
 
-    <StackLayout BackgroundColor="Blue" Margin="10">
-        <Label Text="name" />
-        <Entry x:Name="userName"  Placeholder="write your name" />
-        <Button Text="button" Clicked="Button_Clicked" />
+    <StackLayout VerticalOptions="Center" Padding="30" Spacing="8">
+        <Entry x:Name="email" Placeholder="Email" Keyboard="Email"  TextColor="{StaticResource primary}" />
+        <Entry x:Name="password" Placeholder="Password" TextColor="{StaticResource primary}" IsPassword="True"/>
+        <Button x:Name="loginButton" Text="로그인"  Clicked="loginButton_Clicked" Style="{StaticResource buttonPrimary}" />
     </StackLayout>
 
 </ContentPage>

@@ -15,9 +15,20 @@ namespace TestApp
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void loginButton_Clicked(object sender, EventArgs e)
         {
-            string username = userName.Text;
+            bool isEmailEmpty = string.IsNullOrEmpty(email.Text);
+            bool isPassordEmpty = string.IsNullOrEmpty(password.Text);
+
+            if (isEmailEmpty || isPassordEmpty)
+            {
+                DisplayAlert("Alert", "password needed", "ok");
+            }
+            else
+            {
+                Navigation.PushAsync(new HomePage());
+            }
+
         }
     }
 }
