@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using TestApp.Model;
+using SQLite;
 
 namespace TestApp
 {
@@ -16,5 +18,20 @@ namespace TestApp
         {
             InitializeComponent();
         }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Post post = new Post()
+            {
+                Experience = experienceEntry.Text
+            };
+
+            SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation);
+            conn.CreateTable<Post>();
+            int rows = conn.Insert(post);
+            conn.Insert(post);
+            conn.Close();
+        }
+
     }
 }
