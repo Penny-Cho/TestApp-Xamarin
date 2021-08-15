@@ -26,11 +26,28 @@ namespace TestApp
                 Experience = experienceEntry.Text
             };
 
-            SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation);
-            conn.CreateTable<Post>();
-            int rows = conn.Insert(post);
-            conn.Insert(post);
-            conn.Close();
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                try
+                {
+                    conn.CreateTable<Post>();
+                    int rows = conn.Insert(post);
+                    if (rows >= 0)
+                        DisplayAlert("Success", "uploaded", "Ok");
+                    else
+                        DisplayAlert("Failure", "failed uploading. try again", "Ok");
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+
+
+
+
         }
 
     }

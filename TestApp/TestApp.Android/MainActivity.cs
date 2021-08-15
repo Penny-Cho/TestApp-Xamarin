@@ -17,6 +17,7 @@ namespace TestApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
 
             string dbname = "travel_db.sqlite";
             string folderpath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
