@@ -9,6 +9,28 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
             <Entry x:Name="experienceEntry" Placeholder="write your experience"  />
+            <ListView x:Name="venueListView" HorizontalOptions="FillAndExpand" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label  Text="{Binding name}" TextColor="DodgerBlue" FontAttributes="Bold" />
+                                <Label  Grid.Row="1" Text="{Binding location.address}"/>
+                                <Label  Grid.Column="1" Text="{Binding location.distance, StringFormat='{0}m'}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
