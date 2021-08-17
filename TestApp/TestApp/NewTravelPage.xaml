@@ -13,7 +13,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -22,8 +22,8 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label  Text="{Binding name}" TextColor="DodgerBlue" FontAttributes="Bold" />
-                                <Label  Grid.Row="1" Text="{Binding location.address}"/>
+                                <Label Grid.Row="0" Text="{Binding name}" TextColor="DodgerBlue" FontAttributes="Bold"   />
+                                <Label  Grid.Row="1" Text="{Binding location.address}" />
                                 <Label  Grid.Column="1" Text="{Binding location.distance, StringFormat='{0}m'}" />
                             </Grid>
                         </ViewCell>

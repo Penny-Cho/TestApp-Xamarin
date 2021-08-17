@@ -38,32 +38,42 @@ namespace TestApp
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            Post post = new Post()
-            {
-                Experience = experienceEntry.Text
-            };
 
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            try
             {
-                try
+                var selectedVenue = venueListView.SelectedItem as Venue;
+                var firstCategory = selectedVenue.categories.FirstOrDefault();
+
+                Post post = new Post()
                 {
-                    conn.CreateTable<Post>();
-                    int rows = conn.Insert(post);
-                    if (rows >= 0)
-                        DisplayAlert("Success", "uploaded", "Ok");
-                    else
-                        DisplayAlert("Failure", "failed uploading. try again", "Ok");
+                    Experience = experienceEntry.Text,
+                    CategoryId = firstCategory.id,
+                    CategoryName = firstCategory.name,
+                    VenueName = selectedVenue.name,
+                    Address = selectedVenue.location.address,
+                    Distance = selectedVenue.location.distance,
+                    Latitude = selectedVenue.location.lat,
+                    Longitude = selectedVenue.location.lng,
+                };
+
+                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+                {
+
+                    {
+                        conn.CreateTable<Post>();
+                        int rows = conn.Insert(post);
+                        if (rows >= 0)
+                            DisplayAlert("Success", "uploaded", "Ok");
+                        else
+                            DisplayAlert("Failure", "failed uploading. try again", "Ok");
+                    }
 
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-
             }
-
-
-
+            catch (Exception ex)
+            {
+                throw new Exception("post insert error", ex);
+            }
 
         }
 

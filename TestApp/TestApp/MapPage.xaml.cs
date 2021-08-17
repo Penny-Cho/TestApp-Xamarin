@@ -1,11 +1,12 @@
 ﻿using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TestApp.Model;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -29,7 +30,10 @@ namespace TestApp
             base.OnAppearing();
 
             GetLocation();
+            GetPosts();
+
         }
+
 
 
         protected override void OnDisappearing()
@@ -38,6 +42,13 @@ namespace TestApp
             locator.StopListeningAsync();
 
         }
+
+
+
+
+
+
+
 
 
         private async void GetLocation()
@@ -90,6 +101,46 @@ namespace TestApp
 
             status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
             return status;
+        }
+
+
+        private void GetPosts()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var posts = conn.Table<Post>().ToList();
+
+                DisplayOnMap(posts);
+
+
+            }
+        }
+
+        private void DisplayOnMap(List<Post> posts)
+        {
+            foreach (var post in posts)
+            {
+                try
+                {
+                    var pinCoordinates = new Xamarin.Forms.Maps.Position(post.Latitude, post.Longitude);
+                    var pin = new Pin()
+                    {
+                        Position = pinCoordinates,
+                        Label = post.VenueName,
+                        Address = post.Address,
+                        Type = PinType.SavedPin
+                    };
+
+                    locationsMap.Pins.Add(pin);
+                }
+                catch (NullReferenceException nre) { }
+                catch (Exception ex) { }
+                {
+
+                }
+
+            }
         }
     }
 }

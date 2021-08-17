@@ -4,9 +4,9 @@
             xmlns:local="clr-namespace:TestApp"
             x:Class="TestApp.HomePage">
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Add" IconImageSource="add.png" Clicked="ToolbarItem_Clicked" />
     </TabbedPage.ToolbarItems>
-    <local:HistoryPage Title="History" />
+    <local:HistoryPage Title="History" IconImageSource="add.png" />
     <local:MapPage Title="Map" />
     <local:ProfilePage Title="Profile"/>
 </TabbedPage>

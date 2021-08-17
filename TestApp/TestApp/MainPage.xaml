@@ -6,6 +6,7 @@
              x:Class="TestApp.MainPage">
 
     <StackLayout VerticalOptions="Center" Padding="30" Spacing="8">
+        <Image x:Name="iconImage" Aspect="AspectFit" HorizontalOptions="FillAndExpand" HeightRequest="100" Margin="0, 0, 0, 50"  />
         <Entry x:Name="email" Placeholder="Email" Keyboard="Email"  TextColor="{StaticResource primary}" />
         <Entry x:Name="password" Placeholder="Password" TextColor="{StaticResource primary}" IsPassword="True"/>
         <Button x:Name="loginButton" Text="로그인"  Clicked="loginButton_Clicked" Style="{StaticResource buttonPrimary}" />
