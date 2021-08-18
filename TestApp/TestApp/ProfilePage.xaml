@@ -3,10 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestApp.ProfilePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to ProfilePage!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20, 40, 20, 0">
+            <Label
+                x:Name="postCountLabel"
+                FontAttributes="Bold"
+                Text="--"
+                TextColor="{StaticResource primary}"
+                HorizontalOptions="Center" />
+            <Label Text="posts" HorizontalOptions="Center" TextColor="LightGray" />
+            <ListView x:Name="categoriesListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Path=Key}" Detail="{Binding Path=Value}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
